@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Clean MVVM</string>
+
+    <string name="no_network">No network available</string>
+    <string name="apierror">Something went wrong, Please try again</string>
+    <string name="title_contacts_permission_dialog">Contacts</string>
+    <string name="title_location_permission_dialog">Please enable the GPS of your mobile, otherwise tracking will not be
+        possible!
+    </string>
+    <string name="database">MyDB.db</string>
+
+    <string name="room_data_added">Room DB Working..!</string>
+
+
+    <string name="title_phone_call_permission_dialog">Phone Call</string>
+    <string name="title_storage_permission_dialog">Please Allow App to access Storage!</string>
+    <string name="turn_on_internet">Please turn On the Internet!</string>
+    <string name="doller_symbol">₹</string>
+    <string name="camare_permission">You have denied the access to Camera. Please go to App Settings to allow the same.</string>
+    <string name="retry">Retry</string>
+
+</resources>

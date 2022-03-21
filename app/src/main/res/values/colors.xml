@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="colorPrimary">#DDCE5B</color>
+    <color name="colorPrimaryDark">#9C9352</color>
+    <color name="colorPrimaryLight">#CCC173</color>
+
+    <color name="colorAccent">#3caf29</color>
+
+    <color name="sky_blue">#0080bb</color>
+    <color name="transperent">#b9313131</color>
+
+    <color name="placeholder">#eceff3</color>
+    <color name="newuser">#35374d</color>
+    <color name="button">#1d9d5d</color>
+
+    <color name="white">#ffffff</color>
+    <color name="app_garay">#8e90aa</color>
+    <color name="text_color">#424e5b</color>
+    <color name="text_color_second">#8b9197</color>
+
+    <color name="in_progress">#00c0ef</color>
+    <color name="accepted">#555299</color>
+    <color name="failed">#dd4b39</color>
+    <color name="succefull">#00a65a</color>
+    <color name="new_job">#f4d921</color>
+    <color name="declined">#aca595</color>
+    <color name="notifiction">#e9daa8</color>
+
+    <color name="appgreen">#3CAF29</color>
+    <color name="black">#050505</color>
+    <color name="gray">#a3a5a6</color>
+    <color name="green">#047330</color>
+    <color name="light_black">#232523</color>
+    <color name="light_black_gray">#b9313131</color>
+    <color name="primary_text">#000000</color>
+    <color name="secondary_text">#B0E2E1E1</color>
+    <color name="divider_color">#eceff3</color>
+    <color name="light_green">#8fd1b1</color>
+    <color name="navigation_tab_green">#1fa463</color>
+    <color name="navigation_tab_red">#fd4d4d</color>
+    <color name="btn_inactive">#cbcbcb</color>
+    <color name="fifty_percent_transparency_grey_400">#80bdbdbd</color>
+    <color name="vertical_strip">#f6f6f6</color>
+    <color name="tab_text_primary_color">#ffffff</color>
+    <color name="tab_text_secondary_color">#ccc8c8</color>
+
+</resources>
