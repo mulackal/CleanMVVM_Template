@@ -9,6 +9,8 @@ import com.vip.cleantemplate.common.Resource
 import com.vip.cleantemplate.data.preferences.SharedPreferenceUtils
 import com.vip.cleantemplate.data.preferences.SharedPreferenceValue
 import com.vip.cleantemplate.data.room.UserModel
+import com.vip.cleantemplate.domain.exception.ApiError
+import com.vip.cleantemplate.domain.exception.traceErrorException
 import com.vip.cleantemplate.domain.model.Player
 import com.vip.cleantemplate.domain.usecase.GetUserDBUseCase
 import com.vip.cleantemplate.domain.usecase.MainUsersUseCase
@@ -69,7 +71,11 @@ class MainViewModel(
                 setMessage(R.string.room_data_added)
             }
         }
-        catch (exception : Exception) { Log.d("RoomException", "$exception") }
+        catch (exception : Exception) {
+            /** easy Api exception handling**/
+            val error: ApiError = traceErrorException(exception)
+            setMessage(error?.getErrorMessage())
+            Log.d("RoomException", "$exception") }
 
     }
 }

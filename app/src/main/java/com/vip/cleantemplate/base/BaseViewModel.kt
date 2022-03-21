@@ -19,9 +19,10 @@ abstract class BaseViewModel : ViewModel() {
     open fun setIsProgressBarVisible(isLoad: Boolean) {
         isProgressLoading.value = isLoad }
 
-    open val showMessage = MutableLiveData<Int>()
-    open fun setMessage(message: Int) {
+    open var showMessage = MutableLiveData<Any>()
+    open fun setMessage(message: Any) {
         showMessage.value = message }
+
 
     var job: CompletableJob? = null
     fun cancelJobs(){

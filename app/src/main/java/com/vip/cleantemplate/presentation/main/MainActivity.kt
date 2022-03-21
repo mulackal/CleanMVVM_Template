@@ -52,9 +52,13 @@ class MainActivity : BaseActivity(), OnClickAdapterListener {
 
         with(mainViewModel) {
 
-            showMessage.observe(this@MainActivity, Observer {
-                showToast(it)
+            showMessage.observe(this@MainActivity, Observer { message ->
+                if(message is String)
+                 showToast(message)
+                else if(message is Int)
+                    showToast(message)
             })
+
 
             isProgressLoading.observe(this@MainActivity, Observer { isVisible ->
                 if (isVisible) showLoadingDialog(this@MainActivity)
