@@ -11,7 +11,9 @@ import com.eduvy.demo.utils.extentions.showToast
 import com.vip.cleantemplate.R
 import com.vip.cleantemplate.base.BaseActivity
 import com.vip.cleantemplate.common.Status
+import com.vip.cleantemplate.presentation.main.MainAdapter
 import com.vip.cleantemplate.utils.Variables
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_paging.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -22,13 +24,14 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class PagingActivity : BaseActivity() {
 
     private val viewModel: PagingViewModel by viewModel()
-    private lateinit var adapter: PagingAdapter
+    private lateinit var pageAdapter: PagingAdapter
 
     private var searchJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paging)
+
         setupUI()
         setupObservers()
         setupPaging()
@@ -36,69 +39,60 @@ class PagingActivity : BaseActivity() {
     }
 
     private fun setupObservers() {
-        if (Variables.isNetworkConnected) {
-            viewModel.loadingState.observe(this, Observer {
+
+            viewModel.userDataState.observe(this, Observer {
                 when (it.status) {
                     Status.SUCCESS -> {
                         hideLoadingDialog()
+                        debugLogE("Result-","----- ${it.data} ----")
                         showToast("Data fetched successfully.!")
                     }
                     Status.LOADING -> {
                         showLoadingDialog(this)
-                        showToast("Loading...")
                     }
                     Status.ERROR -> {
                         hideLoadingDialog()
-                        //Handle Error
                         showToast(R.string.apierror)
                     }
                 }
             })
-        } else showToast("No internet connection")
 
     }
 
     private fun setupPaging() {
 
+        /** using Livedata* */
         /* searchJob?.cancel()
          searchJob = lifecycleScope.launch {
              viewModel.pagingData.observe(this@PagingActivity, {
-                 adapter.submitData(this@PagingActivity.lifecycle, it)
+                 pageAdapter.submitData(this@PagingActivity.lifecycle, it)
              })
          }*/
 
-        /*
-        Same thing using flow
-        * */
-        if (Variables.isNetworkConnected) {
+        /** Same thing using Flow* */
             searchJob?.cancel()
             searchJob = lifecycleScope.launch {
                 viewModel.players
                     .collectLatest {
-                        adapter.submitData(it)
+                        pageAdapter.submitData(it)
                     }
             }
-        } else showToast("No internet connection")
     }
 
     private fun setupUI() {
-        rv_paging.layoutManager = LinearLayoutManager(this)
-        adapter = PagingAdapter()
-        rv_paging.addItemDecoration(
-            DividerItemDecoration(
-                rv_paging.context,
-                (rv_paging.layoutManager as LinearLayoutManager).orientation
-            )
-        )
-        rv_paging.adapter = adapter.withLoadStateFooter(
-            footer = PlayersLoadingStateAdapter { retry() }
-        )
 
-        adapter.addLoadStateListener { loadState ->
+        pageAdapter = PagingAdapter()
 
-            //  loadState.mediator?.refresh
+        rv_paging.apply {
+            layoutManager = LinearLayoutManager(this@PagingActivity)
+            rv_paging.adapter = pageAdapter.withLoadStateFooter(
+                footer = PlayersLoadingStateAdapter { retry() })
+        }
+
+        pageAdapter.addLoadStateListener { loadState ->
+
             if (loadState.refresh is LoadState.Loading) {
-                if (adapter.snapshot().isEmpty()) {
+                if (pageAdapter.snapshot().isEmpty()) {
                     showLoadingDialog(this)
                     error_txt.isVisible = true
                 }
@@ -117,7 +111,7 @@ class PagingActivity : BaseActivity() {
                     else -> null
                 }
                 error?.let {
-                    if (adapter.snapshot().isEmpty()) {
+                    if (pageAdapter.snapshot().isEmpty()) {
                         error_txt.isVisible = true
                         error_txt.text = it.error.localizedMessage
                     }
@@ -129,7 +123,7 @@ class PagingActivity : BaseActivity() {
     }
 
     private fun retry() {
-        adapter.retry()
+        pageAdapter.retry()
     }
 
 }

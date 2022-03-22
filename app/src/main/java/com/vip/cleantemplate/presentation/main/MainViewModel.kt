@@ -40,17 +40,17 @@ class MainViewModel(
     }
 
     fun fetchUsers() {
+        if (Variables.isNetworkConnected) {
         launch {
-            if (Variables.isNetworkConnected) {
             _users.postValue(Resource.loading(null))
             usersUseCase.getUsers().let {
                 if (it.isSuccessful) {
                     _users.postValue(Resource.success(it.body()?.data))
                 } else _users.postValue(Resource.error(it.errorBody().toString(), null))
             }
-        }else
-                setMessage(R.string.no_network)
         }
+        }else
+            setMessage(R.string.no_network)
     }
 
     fun  insertandListSampleDb() = launch {

@@ -28,7 +28,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.paging.PagingActivity" />
+        <activity android:name=".presentation.paging.PagingActivity"
+            android:label="My Paging"/>
 
         <activity
             android:name=".presentation.main.MainActivity"

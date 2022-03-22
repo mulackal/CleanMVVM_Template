@@ -41,7 +41,6 @@ class MainAdapter(
             Log.e("imageViewAvatar","------ ${user.id}")
 
             val requestOptions = RequestOptions()
-                requestOptions
                     .placeholder(R.mipmap.ic_launcher_round)
                     .error(R.mipmap.ic_launcher_round)
                     .fitCenter()

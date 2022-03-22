@@ -99,7 +99,6 @@ class MainActivity : BaseActivity(), OnClickAdapterListener {
 
 
     override fun clickedAdapterItem(name: String) {
-        showToast(name)
         Intent(this@MainActivity, PagingActivity::class.java).also {
             it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(it)
