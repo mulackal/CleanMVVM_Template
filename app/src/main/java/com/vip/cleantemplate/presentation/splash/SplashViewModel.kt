@@ -1,6 +1,7 @@
 package com.vip.cleantemplate.presentation.splash
 
 import android.content.Context
+import android.content.IntentSender
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -21,8 +22,12 @@ class SplashViewModel(
     private val splashPageListner = MutableLiveData<SplashState>()
 
     init {
+       // moveToNextScreen()
+    }
+
+    fun moveToNextScreen(){
         viewModelScope.launch {
-            delay(3000)
+            delay(2000)
             gotoNextScreen()
         }
     }
